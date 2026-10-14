@@ -276,6 +276,7 @@ inline const String OPT_CMP_IMG_OCR_RESULT_TYPE {_T("Settings/ImageOcrResultType
 inline const String OPT_CMP_IMG_PREFER_WIC_DECODER {_T("Settings/ImagePreferWICDecoder"s)};
 inline const String OPT_CMP_IMG_SPLITTER_RATIOS {_T("Settings/ImageSplitterRatios"s)};
 inline const String OPT_CMP_IMG_ALIGNMENT {_T("Settings/ImageAlignment"s)};
+inline const String OPT_CMP_IMG_SCALING_MODE {_T("Settings/ImageScalingMode"s)};
 
 // Text file Compare options
 inline const String OPT_CMP_TEXT_SPLITTER_RATIOS {_T("Settings/TextSplitterRatios"s)};
