@@ -226,6 +226,8 @@ protected:
 	afx_msg void OnUpdateImgOverlayMode(CCmdUI* pCmdUI);
 	afx_msg void OnImgDraggingMode(UINT nId);
 	afx_msg void OnUpdateImgDraggingMode(CCmdUI* pCmdUI);
+	afx_msg void OnImgAlignment(UINT nId);
+	afx_msg void OnUpdateImgAlignment(CCmdUI* pCmdUI);
 	afx_msg void OnImgDiffBlockSize(UINT nId);
 	afx_msg void OnUpdateImgDiffBlockSize(CCmdUI* pCmdUI);
 	afx_msg void OnImgThreshold(UINT nId);
