@@ -197,6 +197,7 @@ void Init(COptionsMgr *pOptions)
 	pOptions->InitOption(OPT_CMP_IMG_OCR_RESULT_TYPE, 0, 0, 2);
 	pOptions->InitOption(OPT_CMP_IMG_PREFER_WIC_DECODER, false);
 	pOptions->InitOption(OPT_CMP_IMG_SPLITTER_RATIOS, _T(""));
+	pOptions->InitOption(OPT_CMP_IMG_ALIGNMENT, 0, 0, 8);
 
 	pOptions->InitOption(OPT_CMP_WEB_USERDATAFOLDER_TYPE, 0, 0, 1);
 	pOptions->InitOption(OPT_CMP_WEB_USERDATAFOLDER_PERPANE, true);
