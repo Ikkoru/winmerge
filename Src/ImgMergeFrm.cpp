@@ -146,6 +146,8 @@ BEGIN_MESSAGE_MAP(CImgMergeFrame, CMergeFrameCommon)
 	ON_UPDATE_COMMAND_UI_RANGE(ID_IMG_DRAGGINGMODE_NONE, ID_IMG_DRAGGINGMODE_RECTANGLE_SELECT, OnUpdateImgDraggingMode)
 	ON_COMMAND_RANGE(ID_IMG_ALIGNMENT_TOP_LEFT, ID_IMG_ALIGNMENT_BOTTOM_RIGHT, OnImgAlignment)
 	ON_UPDATE_COMMAND_UI_RANGE(ID_IMG_ALIGNMENT_TOP_LEFT, ID_IMG_ALIGNMENT_BOTTOM_RIGHT, OnUpdateImgAlignment)
+	ON_COMMAND_RANGE(ID_IMG_SCALING_NONE, ID_IMG_SCALING_DOWN_MATCHED, OnImgScalingMode)
+	ON_UPDATE_COMMAND_UI_RANGE(ID_IMG_SCALING_NONE, ID_IMG_SCALING_DOWN_MATCHED, OnUpdateImgScalingMode)
 	ON_COMMAND_RANGE(ID_IMG_DIFFBLOCKSIZE_1, ID_IMG_DIFFBLOCKSIZE_32, OnImgDiffBlockSize)
 	ON_UPDATE_COMMAND_UI_RANGE(ID_IMG_DIFFBLOCKSIZE_1, ID_IMG_DIFFBLOCKSIZE_32, OnUpdateImgDiffBlockSize)
 	ON_COMMAND_RANGE(ID_IMG_THRESHOLD_0, ID_IMG_THRESHOLD_64, OnImgThreshold)
@@ -705,6 +707,7 @@ void CImgMergeFrame::LoadOptions()
 	m_pImgMergeWindow->SetOverlayAnimationInterval(GetOptionsMgr()->GetInt(OPT_CMP_IMG_OVERLAYANIMATIONINTERVAL));
 	m_pImgMergeWindow->SetPreferWICDecoder(GetOptionsMgr()->GetBool(OPT_CMP_IMG_PREFER_WIC_DECODER));
 	m_pImgMergeWindow->SetImageAlignment(static_cast<IImgMergeWindow::IMAGE_ALIGNMENT>(GetOptionsMgr()->GetInt(OPT_CMP_IMG_ALIGNMENT)));
+	m_pImgMergeWindow->SetImageScalingMode(static_cast<IImgMergeWindow::IMAGE_SCALING_MODE>(GetOptionsMgr()->GetInt(OPT_CMP_IMG_SCALING_MODE)));
 }
 
 void CImgMergeFrame::SaveOptions()
@@ -729,6 +732,7 @@ void CImgMergeFrame::SaveOptions()
 	GetOptionsMgr()->SaveOption(OPT_CMP_IMG_BLINKINTERVAL, m_pImgMergeWindow->GetBlinkInterval());
 	GetOptionsMgr()->SaveOption(OPT_CMP_IMG_OVERLAYANIMATIONINTERVAL, m_pImgMergeWindow->GetOverlayAnimationInterval());
 	GetOptionsMgr()->SaveOption(OPT_CMP_IMG_ALIGNMENT, static_cast<int>(m_pImgMergeWindow->GetImageAlignment()));
+	GetOptionsMgr()->SaveOption(OPT_CMP_IMG_SCALING_MODE, static_cast<int>(m_pImgMergeWindow->GetImageScalingMode()));
 }
 /**
  * @brief Save coordinates of the frame, splitters, and bars
@@ -2112,6 +2116,17 @@ void CImgMergeFrame::OnImgAlignment(UINT nId)
 void CImgMergeFrame::OnUpdateImgAlignment(CCmdUI* pCmdUI)
 {
 	pCmdUI->SetRadio(static_cast<IImgMergeWindow::IMAGE_ALIGNMENT>(pCmdUI->m_nID - ID_IMG_ALIGNMENT_TOP_LEFT) == m_pImgMergeWindow->GetImageAlignment());
+}
+
+void CImgMergeFrame::OnImgScalingMode(UINT nId)
+{
+	m_pImgMergeWindow->SetImageScalingMode(static_cast<IImgMergeWindow::IMAGE_SCALING_MODE>(nId - ID_IMG_SCALING_NONE));
+	SaveOptions();
+}
+
+void CImgMergeFrame::OnUpdateImgScalingMode(CCmdUI* pCmdUI)
+{
+	pCmdUI->SetRadio(static_cast<IImgMergeWindow::IMAGE_SCALING_MODE>(pCmdUI->m_nID - ID_IMG_SCALING_NONE) == m_pImgMergeWindow->GetImageScalingMode());
 }
 
 void CImgMergeFrame::OnImgDiffBlockSize(UINT nId)
